@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>RELÁJESE MAMI | Studio Profesional</title>
+    <style>
+        :root { --amarillo: #ffcc00; --verde: #25d366; }
+        body { margin: 0; background: #0a0a0a; color: white; font-family: 'Arial Black', sans-serif; display: flex; flex-direction: column; align-items: center; overflow-x: hidden; }
+        
+        #punto-subida { width: 100%; height: 1px; }
+
+        .portada { 
+            width: 100%; height: 250px; 
+            background: url('portada.jpg') #1a1a1a; 
+            background-size: cover; background-position: center;
+            border-bottom: 5px solid var(--verde);
+        }
+
+        .contenedor-principal { display: flex; gap: 20px; padding: 20px; justify-content: center; flex-wrap: wrap; width: 100%; max-width: 1200px; }
+
+        .visor-estudio { 
+            position: relative; width: 90vw; height: 90vw; max-width: 500px; max-height: 500px;
+            background: #111; border-radius: 20px; border: 1px solid #333;
+            display: flex; justify-content: center; align-items: center; overflow: hidden;
+            touch-action: none;
+        }
+
+        #camiseta-fondo { width: 100%; height: 100%; object-fit: contain; pointer-events: none; transition: 0.3s; }
+
+        .logo-marca-fijo { 
+            position: absolute; width: 12%; top: 32%; left: 23%; 
+            z-index: 5; pointer-events: none;
+        }
+
+        #arte-cliente { 
+            position: absolute; width: 150px; z-index: 10; cursor: move; 
+            top: 40%; left: 40%; touch-action: none;
+        }
+        #img-personalizada { width: 100%; display: block; pointer-events: none; }
+
+        .controles { width: 100%; max-width: 420px; display: flex; flex-direction: column; gap: 15px; }
+        .tarjeta { background: #1a1a1a; padding: 20px; border-radius: 20px; border: 1px solid #333; }
+        
+        .grid-colores { 
+            display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; 
+            max-height: 300px; overflow-y: auto; padding: 5px; background: #000; border-radius: 15px;
+        }
+
+        .circulo { width: 45px; height: 45px; border-radius: 50%; cursor: pointer; border: 2px solid #333; transition: 0.2s; margin: auto; }
+
+        .btn-whatsapp { 
+            width: 100%; background: var(--verde); color: white; padding: 20px; 
+            border: none; border-radius: 15px; font-weight: bold; font-size: 18px; 
+            cursor: pointer; text-decoration: none; display: flex; align-items: center; 
+            justify-content: center; gap: 10px;
+        }
+
+        .galeria-artes { width: 100%; padding: 20px; text-align: center; border-top: 1px solid #222; }
+        .scroll-artes { display: flex; gap: 15px; overflow-x: auto; padding: 15px; justify-content: flex-start; }
+        .caja-arte { min-width: 100px; height: 100px; background: #222; border-radius: 15px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .caja-arte img { max-width: 70%; }
+    </style>
+</head>
+<body>
+
+    <div class="portada"></div>
+    <div id="punto-subida"></div>
+
+    <div class="contenedor-principal">
+        <div class="visor-estudio" id="espacio-trabajo">
+            <img src="camiseta-base.jpg" id="camiseta-fondo">
+            <img src="logo-mami.png" class="logo-marca-fijo" onerror="this.style.display='none'">
+            <div id="arte-cliente">
+                <img src="5.png" id="img-personalizada">
+            </div>
+        </div>
+
+        <div class="controles">
+            <div class="tarjeta">
+                <p style="text-align:center; color:var(--amarillo); margin-bottom:10px;">COLOR DE PRENDA</p>
+                <div class="grid-colores">
+                    <div class="circulo" style="background:#ffffff;" onclick="pintar('none')"></div>
+                    <div class="circulo" style="background:#000000;" onclick="pintar('brightness(0.1)')"></div>
+                    <div class="circulo" style="background:#ff0000;" onclick="pintar('brightness(0.5) sepia(1) hue-rotate(-50deg) saturate(10)')"></div>
+                    <div class="circulo" style="background:#00008b;" onclick="pintar('brightness(0.3) sepia(1) hue-rotate(190deg) saturate(8)')"></div>
+                    <div class="circulo" style="background:#00ff00;" onclick="pintar('brightness(0.6) sepia(1) hue-rotate(80deg) saturate(10)')"></div>
+                    <div class="circulo" style="background:#ffff00;" onclick="pintar('brightness(1.1) sepia(1) hue-rotate(10deg) saturate(5)')"></div>
+                    <div class="circulo" style="background:#ff8800;" onclick="pintar('brightness(0.8) sepia(1) hue-rotate(340deg) saturate(10)')"></div>
+                    <div class="circulo" style="background:#800080;" onclick="pintar('brightness(0.4) sepia(1) hue-rotate(250deg) saturate(6)')"></div>
+                    <div class="circulo" style="background:#ff69b4;" onclick="pintar('brightness(0.7) sepia(1) hue-rotate(290deg) saturate(5)')"></div>
+                    <div class="circulo" style="background:#40e0d0;" onclick="pintar('brightness(0.6) sepia(1) hue-rotate(140deg) saturate(6)')"></div>
+                </div>
+            </div>
+
+            <div class="tarjeta">
+                <p style="text-align:center; font-size:12px; margin-top:0;">TAMAÑO DEL DISEÑO</p>
+                <input type="range" min="60" max="300" value="150" style="width:100%; accent-color:var(--amarillo);" 
+                       oninput="document.getElementById('arte-cliente').style.width = this.value + 'px'">
+            </div>
+
+            <a href="https://wa.me/573012134377?text=Hola%20Relájese%20Mami!%20Acabo%20de%20diseñar%20mi%20camiseta." 
+               target="_blank" class="btn-whatsapp">
+                📱 PEDIR POR WHATSAPP
+            </a>
+        </div>
+    </div>
+    <div class="galeria-artes">
+        <p style="color:var(--amarillo)">ELIGE TU DISEÑO:</p>
+        <div class="scroll-artes">
+            <div class="caja-arte" onclick="cambiarArte('5.png')"><img src="5.png"></div>
+            <div class="caja-arte" onclick="cambiarArte('1.png')"><img src="1.png"></div>
+            <div class="caja-arte" onclick="cambiarArte('14.png')"><img src="14.png"></div>
+            <div class="caja-arte" onclick="cambiarArte('11.png')"><img src="11.png"></div>
+            <div class="caja-arte" onclick="cambiarArte('16.png')"><img src="16.png"></div>
+            <div class="caja-arte" onclick="cambiarArte('4.png')"><img src="4.png"></div>
+            <div class="caja-arte" onclick="cambiarArte('2.png')"><img src="2.png"></div>
+            <div class="caja-arte" onclick="cambiarArte('20.png')"><img src="20.png"></div>
+            <div class="caja-arte" onclick="cambiarArte('12.png')"><img src="12.png"></div>
+            <div class="caja-arte" onclick="cambiarArte('7.png')"><img src="7.png"></div>
+            <div class="caja-arte" onclick="cambiarArte('13.png')"><img src="13.png"></div>
+            <div class="caja-arte" onclick="cambiarArte('23.png')"><img src="23.png"></div>
+            <div class="caja-arte" onclick="cambiarArte('24.png')"><img src="24.png"></div>
+            <div class="caja-arte" onclick="cambiarArte('25.png')"><img src="25.png"></div>
+            <div class="caja-arte" onclick="cambiarArte('26.png')"><img src="26.png"></div>
+            <div class="caja-arte" onclick="cambiarArte('6.png')"><img src="6.png"></div>
+            <div class="caja-arte" onclick="cambiarArte('8.png')"><img src="8.png"></div>
+              <div class="caja-arte" onclick="cambiarArte('9.png')"><img src="9.png"></div>
+            <div class="caja-arte" onclick="cambiarArte('10.png')"><img src="10.png"></div>
+            <div class="caja-arte" onclick="cambiarArte('15.png')"><img src="15.png"></div>
+            <div class="caja-arte" onclick="cambiarArte('17.png')"><img src="17.png"></div>
+            <div class="caja-arte" onclick="cambiarArte('19.png')"><img src="19.png"></div>
+            <div class="caja-arte" onclick="cambiarArte('30.png')"><img src="30.png"></div>
+        </div>
+    </div>
+
+    <script>
+        function pintar(f) { document.getElementById('camiseta-fondo').style.filter = f; }
+        
+        function cambiarArte(src) { 
+            document.getElementById('img-personalizada').src = src; 
+            document.getElementById('punto-subida').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        const arte = document.getElementById('arte-cliente');
+        let drag = false;
+
+        function mover(x, y) {
+            if(!drag) return;
+            const r = document.getElementById('espacio-trabajo').getBoundingClientRect();
+            let posX = x - r.left - (arte.offsetWidth / 2);
+            let posY = y - r.top - (arte.offsetHeight / 2);
+            arte.style.left = posX + 'px';
+            arte.style.top = posY + 'px';
+        }
+
+        arte.onmousedown = (e) => { drag = true; };
+        window.onmouseup = () => { drag = false; };
+        window.onmousemove = (e) => mover(e.clientX, e.clientY);
+
+        arte.addEventListener('touchstart', (e) => { drag = true; }, {passive: false});
+        window.addEventListener('touchend', () => { drag = false; });
+        window.addEventListener('touchmove', (e) => {
+            if(drag) {
+                e.preventDefault();
+                const touch = e.touches[0];
+                mover(touch.clientX, touch.clientY);
+            }
+        }, {passive: false});
+    </script>
+</body>
+</html>
